@@ -1,0 +1,2028 @@
+[gd_scene load_steps=12 format=3 uid="uid://bdphhyefh3qg2"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_hloy8"]
+[ext_resource type="TileSet" uid="uid://c61ula3ksct55" path="res://tiles/ground.tres" id="1_yt7rp"]
+[ext_resource type="PackedScene" uid="uid://dre8tkhxiexem" path="res://Player/player.tscn" id="2_cyffv"]
+[ext_resource type="PackedScene" uid="uid://lxj6et4xwu22" path="res://ui/game_over_ui.tscn" id="2_wmt4n"]
+[ext_resource type="PackedScene" uid="uid://cry0gviihh4ve" path="res://tiles/trees.tscn" id="2_yj730"]
+[ext_resource type="PackedScene" uid="uid://ec2ki12ii6qg" path="res://systems/spawner_control/mob_spawner.tscn" id="3_fqtk0"]
+[ext_resource type="PackedScene" uid="uid://c6oerjjd3dbae" path="res://systems/spawner_control/mob_spawner_barrel.tscn" id="4_ltn1h"]
+[ext_resource type="PackedScene" uid="uid://cooy1k8jwbck6" path="res://ui/game_ui.tscn" id="6_lma0a"]
+[ext_resource type="AudioStream" uid="uid://w0rc1hg8t1i8" path="res://sound/game_sound.wav" id="7_nyg15"]
+[ext_resource type="Script" path="res://sound/script/Game_sound.gd" id="8_3eymg"]
+[ext_resource type="Script" path="res://systems/difficulty_system.gd" id="9_jvlc3"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_hloy8")
+game_over_ui_template = ExtResource("2_wmt4n")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_yt7rp")
+format = 2
+layer_0/name = "Terrain"
+layer_0/z_index = -1
+layer_0/tile_data = PackedInt32Array(-131076, 65536, 1, 917500, 65536, 1, 851989, 65536, 1, -196587, 65536, 1, -131051, 65536, 1, -65515, 65536, 1, 21, 65536, 1, 65557, 65536, 1, 131093, 65536, 1, 196629, 65536, 1, 262165, 65536, 1, 327701, 65536, 1, 393237, 65536, 1, 458773, 65536, 1, 524309, 65536, 1, 589845, 65536, 1, 655381, 65536, 1, 720917, 65536, 1, 786453, 65536, 1, 851988, 65536, 1, 851987, 65536, 1, 851986, 65536, 1, 851985, 65536, 1, 851984, 65536, 1, 851983, 65536, 1, 851982, 65536, 1, 851981, 65536, 1, 851980, 65536, 1, 851979, 65536, 1, 851978, 65536, 1, 851977, 65536, 1, 851976, 65536, 1, 851975, 65536, 1, 851974, 65536, 1, 851973, 65536, 1, 851972, 65536, 1, 851971, 65536, 1, 851970, 65536, 1, 851969, 65536, 1, 851968, 65536, 1, 917503, 65536, 1, 917502, 65536, 1, 917501, 65536, 1, 851964, 65536, 1, 786428, 65536, 1, 720892, 65536, 1, 655356, 65536, 1, 589820, 65536, 1, 524284, 65536, 1, 458748, 65536, 1, 393212, 65536, 1, 327676, 65536, 1, 262140, 65536, 1, 196604, 65536, 1, 131068, 65536, 1, 65532, 65536, 1, -4, 65536, 1, -65540, 65536, 1, -131075, 65536, 1, -131074, 65536, 1, -131073, 65536, 1, -196608, 65536, 1, -196607, 65536, 1, -196606, 65536, 1, -196605, 65536, 1, -196604, 65536, 1, -196603, 65536, 1, -196602, 65536, 1, -196601, 65536, 1, -196600, 65536, 1, -196599, 65536, 1, -196598, 65536, 1, -196597, 65536, 1, -196596, 65536, 1, -196595, 65536, 1, -196594, 65536, 1, -196593, 65536, 1, -196592, 65536, 1, -196591, 65536, 1, -196590, 65536, 1, -196589, 65536, 1, -196588, 65536, 1, -65539, 65536, 1, -3, 65536, 1, 65533, 65536, 1, 131069, 65536, 1, 196605, 65536, 1, 262141, 65536, 1, 327677, 65536, 1, 393213, 65536, 1, 458749, 65536, 1, 524285, 65536, 1, 589821, 65536, 1, 655357, 65536, 1, 720893, 65536, 1, 786429, 65536, 1, 851965, 65536, 1, -65538, 65536, 1, -2, 65536, 1, 65534, 65536, 1, 131070, 65536, 1, 196606, 65536, 1, 262142, 65536, 1, 327678, 65536, 1, 393214, 65536, 1, 458750, 65536, 1, 524286, 65536, 1, 589822, 65536, 1, 655358, 65536, 1, 720894, 65536, 1, 786430, 65536, 1, 851966, 65536, 1, -65537, 65536, 1, -1, 65536, 1, 65535, 65536, 1, 131071, 65536, 1, 196607, 65536, 1, 262143, 65536, 1, 327679, 65536, 1, 393215, 65536, 1, 458751, 65536, 1, 524287, 65536, 1, 589823, 65536, 1, 655359, 65536, 1, 720895, 65536, 1, 786431, 65536, 1, 851967, 65536, 1, -131072, 65536, 1, -65536, 65536, 1, 0, 65536, 1, 65536, 65536, 1, 131072, 65536, 1, 196608, 65536, 1, 262144, 65536, 1, 327680, 65536, 1, 393216, 65536, 1, 458752, 65536, 1, 524288, 65536, 1, 589824, 65536, 1, 655360, 65536, 1, 720896, 65536, 1, 786432, 65536, 1, -131071, 65536, 1, -65535, 65536, 1, 1, 65536, 1, 65537, 65536, 1, 131073, 65536, 1, 196609, 65536, 1, 262145, 65536, 1, 327681, 65536, 1, 393217, 65536, 1, 458753, 65536, 1, 524289, 65536, 1, 589825, 65536, 1, 655361, 65536, 1, 720897, 65536, 1, 786433, 65536, 1, -131070, 65536, 1, -65534, 65536, 1, 2, 65536, 1, 65538, 65536, 1, 131074, 65536, 1, 196610, 65536, 1, 262146, 65536, 1, 327682, 65536, 1, 393218, 65536, 1, 458754, 65536, 1, 524290, 65536, 1, 589826, 65536, 1, 655362, 65536, 1, 720898, 65536, 1, 786434, 65536, 1, -131069, 65536, 1, -65533, 65536, 1, 3, 65536, 1, 65539, 65536, 1, 131075, 65536, 1, 196611, 65536, 1, 262147, 65536, 1, 327683, 65536, 1, 393219, 65536, 1, 458755, 65536, 1, 524291, 65536, 1, 589827, 65536, 1, 655363, 65536, 1, 720899, 65536, 1, 786435, 65536, 1, -131068, 65536, 1, -65532, 65536, 1, 4, 65536, 1, 65540, 65536, 1, 131076, 65536, 1, 196612, 65536, 1, 262148, 65536, 1, 327684, 65536, 1, 393220, 65536, 1, 458756, 65536, 1, 524292, 65536, 1, 589828, 65536, 1, 655364, 65536, 1, 720900, 65536, 1, 786436, 65536, 1, -131067, 65536, 1, -65531, 65536, 1, 5, 65536, 1, 65541, 65536, 1, 131077, 65536, 1, 196613, 65536, 1, 262149, 65536, 1, 327685, 65536, 1, 393221, 65536, 1, 458757, 65536, 1, 524293, 65536, 1, 589829, 65536, 1, 655365, 65536, 1, 720901, 65536, 1, 786437, 65536, 1, -131066, 65536, 1, -65530, 65536, 1, 6, 65536, 1, 65542, 65536, 1, 131078, 65536, 1, 196614, 65536, 1, 262150, 65536, 1, 327686, 65536, 1, 393222, 65536, 1, 458758, 65536, 1, 524294, 65536, 1, 589830, 65536, 1, 655366, 65536, 1, 720902, 65536, 1, 786438, 65536, 1, -131065, 65536, 1, -65529, 65536, 1, 7, 65536, 1, 65543, 65536, 1, 131079, 65536, 1, 196615, 65536, 1, 262151, 65536, 1, 327687, 65536, 1, 393223, 65536, 1, 458759, 65536, 1, 524295, 65536, 1, 589831, 65536, 1, 655367, 65536, 1, 720903, 65536, 1, 786439, 65536, 1, -131064, 65536, 1, -65528, 65536, 1, 8, 65536, 1, 65544, 65536, 1, 131080, 65536, 1, 196616, 65536, 1, 262152, 65536, 1, 327688, 65536, 1, 393224, 65536, 1, 458760, 65536, 1, 524296, 65536, 1, 589832, 65536, 1, 655368, 65536, 1, 720904, 65536, 1, 786440, 65536, 1, -131063, 65536, 1, -65527, 65536, 1, 9, 65536, 1, 65545, 65536, 1, 131081, 65536, 1, 196617, 65536, 1, 262153, 65536, 1, 327689, 65536, 1, 393225, 65536, 1, 458761, 65536, 1, 524297, 65536, 1, 589833, 65536, 1, 655369, 65536, 1, 720905, 65536, 1, 786441, 65536, 1, -131062, 65536, 1, -65526, 65536, 1, 10, 65536, 1, 65546, 65536, 1, 131082, 65536, 1, 196618, 65536, 1, 262154, 65536, 1, 327690, 65536, 1, 393226, 65536, 1, 458762, 65536, 1, 524298, 65536, 1, 589834, 65536, 1, 655370, 65536, 1, 720906, 65536, 1, 786442, 65536, 1, -131061, 65536, 1, -65525, 65536, 1, 11, 65536, 1, 65547, 65536, 1, 131083, 65536, 1, 196619, 65536, 1, 262155, 65536, 1, 327691, 65536, 1, 393227, 65536, 1, 458763, 65536, 1, 524299, 65536, 1, 589835, 65536, 1, 655371, 65536, 1, 720907, 65536, 1, 786443, 65536, 1, -131060, 65536, 1, -65524, 65536, 1, 12, 65536, 1, 65548, 65536, 1, 131084, 65536, 1, 196620, 65536, 1, 262156, 65536, 1, 327692, 65536, 1, 393228, 65536, 1, 458764, 65536, 1, 524300, 65536, 1, 589836, 65536, 1, 655372, 65536, 1, 720908, 65536, 1, 786444, 65536, 1, -131059, 65536, 1, -65523, 65536, 1, 13, 65536, 1, 65549, 65536, 1, 131085, 65536, 1, 196621, 65536, 1, 262157, 65536, 1, 327693, 65536, 1, 393229, 65536, 1, 458765, 65536, 1, 524301, 65536, 1, 589837, 65536, 1, 655373, 65536, 1, 720909, 65536, 1, 786445, 65536, 1, -131058, 65536, 1, -65522, 65536, 1, 14, 65536, 1, 65550, 65536, 1, 131086, 65536, 1, 196622, 65536, 1, 262158, 65536, 1, 327694, 65536, 1, 393230, 65536, 1, 458766, 65536, 1, 524302, 65536, 1, 589838, 65536, 1, 655374, 65536, 1, 720910, 65536, 1, 786446, 65536, 1, -131057, 65536, 1, -65521, 65536, 1, 15, 65536, 1, 65551, 65536, 1, 131087, 65536, 1, 196623, 65536, 1, 262159, 65536, 1, 327695, 65536, 1, 393231, 65536, 1, 458767, 65536, 1, 524303, 65536, 1, 589839, 65536, 1, 655375, 65536, 1, 720911, 65536, 1, 786447, 65536, 1, -131056, 65536, 1, -65520, 65536, 1, 16, 65536, 1, 65552, 65536, 1, 131088, 65536, 1, 196624, 65536, 1, 262160, 65536, 1, 327696, 65536, 1, 393232, 65536, 1, 458768, 65536, 1, 524304, 65536, 1, 589840, 65536, 1, 655376, 65536, 1, 720912, 65536, 1, 786448, 65536, 1, -131055, 65536, 1, -65519, 65536, 1, 17, 65536, 1, 65553, 65536, 1, 131089, 65536, 1, 196625, 65536, 1, 262161, 65536, 1, 327697, 65536, 1, 393233, 65536, 1, 458769, 65536, 1, 524305, 65536, 1, 589841, 65536, 1, 655377, 65536, 1, 720913, 65536, 1, 786449, 65536, 1, -131054, 65536, 1, -65518, 65536, 1, 18, 65536, 1, 65554, 65536, 1, 131090, 65536, 1, 196626, 65536, 1, 262162, 65536, 1, 327698, 65536, 1, 393234, 65536, 1, 458770, 65536, 1, 524306, 65536, 1, 589842, 65536, 1, 655378, 65536, 1, 720914, 65536, 1, 786450, 65536, 1, -131053, 65536, 1, -65517, 65536, 1, 19, 65536, 1, 65555, 65536, 1, 131091, 65536, 1, 196627, 65536, 1, 262163, 65536, 1, 327699, 65536, 1, 393235, 65536, 1, 458771, 65536, 1, 524307, 65536, 1, 589843, 65536, 1, 655379, 65536, 1, 720915, 65536, 1, 786451, 65536, 1, -131052, 65536, 1, -65516, 65536, 1, 20, 65536, 1, 65556, 65536, 1, 131092, 65536, 1, 196628, 65536, 1, 262164, 65536, 1, 327700, 65536, 1, 393236, 65536, 1, 458772, 65536, 1, 524308, 65536, 1, 589844, 65536, 1, 655380, 65536, 1, 720916, 65536, 1, 786452, 65536, 1, -262150, 0, 0, 1048570, 0, 2, 983063, 131072, 2, -327657, 131072, 0, -262149, 65536, 1, -262148, 65536, 1, -262147, 65536, 1, -262146, 65536, 1, -262145, 65536, 1, -327680, 65536, 1, -327679, 65536, 1, -327678, 65536, 1, -327677, 65536, 1, -327676, 65536, 1, -327675, 65536, 1, -327674, 65536, 1, -327673, 65536, 1, -327672, 65536, 1, -327671, 65536, 1, -327670, 65536, 1, -327669, 65536, 1, -327668, 65536, 1, -327667, 65536, 1, -327666, 65536, 1, -327665, 65536, 1, -327664, 65536, 1, -327663, 65536, 1, -327662, 65536, 1, -327661, 65536, 1, -327660, 65536, 1, -327659, 65536, 1, -327658, 65536, 0, -262121, 131072, 1, -196585, 131072, 1, -131049, 131072, 1, -65513, 131072, 1, 23, 131072, 1, 65559, 131072, 1, 131095, 131072, 1, 196631, 131072, 1, 262167, 131072, 1, 327703, 131072, 1, 393239, 131072, 1, 458775, 131072, 1, 524311, 131072, 1, 589847, 131072, 1, 655383, 131072, 1, 720919, 131072, 1, 786455, 131072, 1, 851991, 131072, 1, 917527, 131072, 1, 1048571, 65536, 2, 1048572, 65536, 2, 1048573, 65536, 2, 1048574, 65536, 2, 1048575, 65536, 2, 983040, 65536, 2, 983041, 65536, 2, 983042, 65536, 2, 983043, 65536, 2, 983044, 65536, 2, 983045, 65536, 2, 983046, 65536, 2, 983047, 65536, 2, 983048, 65536, 2, 983049, 65536, 2, 983050, 65536, 2, 983051, 65536, 2, 983052, 65536, 2, 983053, 65536, 2, 983054, 65536, 2, 983055, 65536, 2, 983056, 65536, 2, 983057, 65536, 2, 983058, 65536, 2, 983059, 65536, 2, 983060, 65536, 2, 983061, 65536, 2, 983062, 65536, 2, -196614, 0, 1, -131078, 0, 1, -65542, 0, 1, -6, 0, 1, 65530, 0, 1, 131066, 0, 1, 196602, 0, 1, 262138, 0, 1, 327674, 0, 1, 393210, 0, 1, 458746, 0, 1, 524282, 0, 1, 589818, 0, 1, 655354, 0, 1, 720890, 0, 1, 786426, 0, 1, 851962, 0, 1, 917498, 0, 1, 983034, 0, 1, -196613, 65536, 1, -131077, 65536, 1, -65541, 65536, 1, -5, 65536, 1, 65531, 65536, 1, 131067, 65536, 1, 196603, 65536, 1, 262139, 65536, 1, 327675, 65536, 1, 393211, 65536, 1, 458747, 65536, 1, 524283, 65536, 1, 589819, 65536, 1, 655355, 65536, 1, 720891, 65536, 1, 786427, 65536, 1, 851963, 65536, 1, 917499, 65536, 1, 983035, 65536, 1, -196612, 65536, 1, 983036, 65536, 1, -196611, 65536, 1, 983037, 65536, 1, -196610, 65536, 1, 983038, 65536, 1, -196609, 65536, 1, 983039, 65536, 1, -262144, 65536, 1, 917504, 65536, 1, -262143, 65536, 1, 917505, 65536, 1, -262142, 65536, 1, 917506, 65536, 1, -262141, 65536, 1, 917507, 65536, 1, -262140, 65536, 1, 917508, 65536, 1, -262139, 65536, 1, 917509, 65536, 1, -262138, 65536, 1, 917510, 65536, 1, -262137, 65536, 1, 917511, 65536, 1, -262136, 65536, 1, 917512, 65536, 1, -262135, 65536, 1, 917513, 65536, 1, -262134, 65536, 1, 917514, 65536, 1, -262133, 65536, 1, 917515, 65536, 1, -262132, 65536, 1, 917516, 65536, 1, -262131, 65536, 1, 917517, 65536, 1, -262130, 65536, 1, 917518, 65536, 1, -262129, 65536, 1, 917519, 65536, 1, -262128, 65536, 1, 917520, 65536, 1, -262127, 65536, 1, 917521, 65536, 1, -262126, 65536, 1, 917522, 65536, 1, -262125, 65536, 1, 917523, 65536, 1, -262124, 65536, 1, 917524, 65536, 1, -262123, 65536, 1, 917525, 65536, 1, -262122, 65536, 1, -196586, 65536, 1, -131050, 65536, 1, -65514, 65536, 1, 22, 65536, 1, 65558, 65536, 1, 131094, 65536, 1, 196630, 65536, 1, 262166, 65536, 1, 327702, 65536, 1, 393238, 65536, 1, 458774, 65536, 1, 524310, 65536, 1, 589846, 65536, 1, 655382, 65536, 1, 720918, 65536, 1, 786454, 65536, 1, 851990, 65536, 1, 917526, 65536, 1, -393195, 65536, 1, -393196, 65536, 1, -393197, 65536, 1, -393198, 65536, 1, -393199, 65536, 1, -393200, 65536, 1, -393201, 65536, 1, -393202, 65536, 1, -393203, 65536, 1, -393204, 65536, 1, -393205, 65536, 1, -393207, 65536, 1, -393208, 65536, 1, -393209, 65536, 1, -393210, 65536, 1, -393211, 65536, 1, -393212, 65536, 1, -393213, 65536, 1, -393214, 65536, 1, -393215, 65536, 1, -393216, 65536, 1, -327681, 65536, 1, -327682, 65536, 1, -327683, 65536, 1, -327684, 65536, 1, -327685, 65536, 1)
+layer_1/name = "front"
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array(-393211, 19, 0, -327675, 19, 1, -196611, 262144, 0, -65537, 262144, 0, 65532, 262144, 0, 262142, 262144, 0, 458753, 262144, 0, 589821, 262144, 0, 393212, 262144, 0, 786430, 262144, 0, 851964, 262144, 0, 786438, 262144, 0, 524293, 262144, 0, 196614, 262144, 0, 786443, 262144, 0, 589838, 262144, 0, 393231, 262144, 0, 720913, 262144, 0, 851987, 262144, 0, 851990, 262144, 0, 458772, 262144, 0, 196626, 262144, 0, 131087, 262144, 0, 65546, 262144, 0, -262131, 262144, 0, -65518, 262144, 0, 65556, 262144, 0, -196588, 262144, 0, -131058, 262144, 0, -196603, 262144, 0, 65540, 262144, 0, -262135, 262144, 0, -262143, 262144, 0, 851965, 12, 0, 589820, 12, 0, 786444, 12, 0, 720914, 12, 0, 458771, 12, 0, 589828, 11, 0, 458747, 11, 0, 65533, 11, 0, -196610, 11, 0, -196604, 12, 0, -196596, 12, 0, -65517, 12, 0, -65539, 17, 0, 524308, 17, 0, 786446, 18, 0, 786428, 18, 0, 196602, 65557, 1, 262138, 65557, 2, 786454, 65557, 2, 720918, 65557, 1, 720917, 9, 0, 655382, 65557, 0, 720919, 131093, 1, 196603, 131093, 1, 131066, 65557, 0, 262139, 18, 0, 524283, 8, 0, 786450, 8, 0, 458770, 8, 0, 786453, 10, 0, 524307, 16, 0, -4, 16, 0, 589829, 15, 0)
+
+[node name="Trees" type="Node" parent="TileMap"]
+
+[node name="Trees" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-386, -372)
+
+[node name="Trees181" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-386, -372)
+
+[node name="Trees172" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-394, -413)
+
+[node name="Trees170" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-360, -402)
+
+[node name="Trees171" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-312, -408)
+
+[node name="Trees169" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-329, -378)
+
+[node name="Trees177" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-312, -408)
+
+[node name="Trees178" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-329, -378)
+
+[node name="Trees180" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-329, -378)
+
+[node name="Trees179" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-260, -398)
+
+[node name="Trees173" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-394, -413)
+
+[node name="Trees174" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-360, -402)
+
+[node name="Trees175" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-312, -408)
+
+[node name="Trees176" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-329, -378)
+
+[node name="Trees182" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-250, -376)
+
+[node name="Trees183" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-250, -376)
+
+[node name="Trees184" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-258, -417)
+
+[node name="Trees185" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-224, -406)
+
+[node name="Trees186" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-176, -412)
+
+[node name="Trees187" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-193, -382)
+
+[node name="Trees188" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-176, -412)
+
+[node name="Trees189" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-193, -382)
+
+[node name="Trees190" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-193, -382)
+
+[node name="Trees191" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-124, -402)
+
+[node name="Trees192" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-258, -417)
+
+[node name="Trees193" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-224, -406)
+
+[node name="Trees194" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-176, -412)
+
+[node name="Trees195" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-193, -382)
+
+[node name="Trees196" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-81, -375)
+
+[node name="Trees197" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-81, -375)
+
+[node name="Trees198" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-89, -416)
+
+[node name="Trees199" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-55, -405)
+
+[node name="Trees200" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-7, -411)
+
+[node name="Trees201" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-24, -381)
+
+[node name="Trees202" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-7, -411)
+
+[node name="Trees203" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-24, -381)
+
+[node name="Trees204" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-24, -381)
+
+[node name="Trees205" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(45, -401)
+
+[node name="Trees206" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-89, -416)
+
+[node name="Trees207" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-55, -405)
+
+[node name="Trees208" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-7, -411)
+
+[node name="Trees209" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-24, -381)
+
+[node name="Trees210" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(82, -375)
+
+[node name="Trees211" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(82, -375)
+
+[node name="Trees212" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(74, -416)
+
+[node name="Trees213" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(108, -405)
+
+[node name="Trees214" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(156, -411)
+
+[node name="Trees215" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(139, -381)
+
+[node name="Trees216" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(156, -411)
+
+[node name="Trees217" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(139, -381)
+
+[node name="Trees218" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(139, -381)
+
+[node name="Trees219" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(208, -401)
+
+[node name="Trees220" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(74, -416)
+
+[node name="Trees221" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(108, -405)
+
+[node name="Trees222" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(156, -411)
+
+[node name="Trees223" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(139, -381)
+
+[node name="Trees532" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(195, -374)
+
+[node name="Trees533" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(195, -374)
+
+[node name="Trees224" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(260, -378)
+
+[node name="Trees225" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(260, -378)
+
+[node name="Trees226" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(252, -419)
+
+[node name="Trees227" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(286, -408)
+
+[node name="Trees228" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(334, -414)
+
+[node name="Trees229" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(317, -384)
+
+[node name="Trees230" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(334, -414)
+
+[node name="Trees231" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(317, -384)
+
+[node name="Trees232" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(317, -384)
+
+[node name="Trees233" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(386, -404)
+
+[node name="Trees234" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(239, -371)
+
+[node name="Trees235" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(376, -380)
+
+[node name="Trees534" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(376, -380)
+
+[node name="Trees236" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(334, -414)
+
+[node name="Trees237" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(317, -384)
+
+[node name="Trees238" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(429, -378)
+
+[node name="Trees239" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(429, -378)
+
+[node name="Trees240" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(421, -419)
+
+[node name="Trees241" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(455, -408)
+
+[node name="Trees242" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(503, -414)
+
+[node name="Trees243" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(486, -384)
+
+[node name="Trees244" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(503, -414)
+
+[node name="Trees245" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(486, -384)
+
+[node name="Trees246" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(486, -384)
+
+[node name="Trees247" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(555, -404)
+
+[node name="Trees249" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(530, -383)
+
+[node name="Trees535" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(530, -383)
+
+[node name="Trees250" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(503, -414)
+
+[node name="Trees251" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(486, -384)
+
+[node name="Trees252" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(584, -380)
+
+[node name="Trees253" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(584, -380)
+
+[node name="Trees254" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(576, -421)
+
+[node name="Trees255" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(610, -410)
+
+[node name="Trees256" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(658, -416)
+
+[node name="Trees257" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(641, -386)
+
+[node name="Trees258" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(658, -416)
+
+[node name="Trees259" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(641, -386)
+
+[node name="Trees260" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(641, -386)
+
+[node name="Trees261" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(710, -406)
+
+[node name="Trees262" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(554, -378)
+
+[node name="Trees263" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(29, -374)
+
+[node name="Trees536" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-138, -372)
+
+[node name="Trees537" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-284, -366)
+
+[node name="Trees264" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(658, -416)
+
+[node name="Trees265" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(641, -386)
+
+[node name="Trees266" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(756, -380)
+
+[node name="Trees267" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(756, -380)
+
+[node name="Trees268" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(748, -421)
+
+[node name="Trees269" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(782, -410)
+
+[node name="Trees270" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(830, -416)
+
+[node name="Trees271" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(813, -386)
+
+[node name="Trees272" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(830, -416)
+
+[node name="Trees273" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(813, -386)
+
+[node name="Trees274" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(813, -386)
+
+[node name="Trees275" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(882, -406)
+
+[node name="Trees276" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(748, -421)
+
+[node name="Trees277" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(782, -410)
+
+[node name="Trees278" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(830, -416)
+
+[node name="Trees279" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(813, -386)
+
+[node name="Trees280" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(916, -379)
+
+[node name="Trees281" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(916, -379)
+
+[node name="Trees282" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(908, -420)
+
+[node name="Trees283" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(942, -409)
+
+[node name="Trees284" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(990, -415)
+
+[node name="Trees285" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(973, -385)
+
+[node name="Trees286" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(990, -415)
+
+[node name="Trees287" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(973, -385)
+
+[node name="Trees288" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(973, -385)
+
+[node name="Trees289" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1042, -405)
+
+[node name="Trees290" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(908, -420)
+
+[node name="Trees291" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(942, -409)
+
+[node name="Trees292" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(990, -415)
+
+[node name="Trees293" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(973, -385)
+
+[node name="Trees538" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1025, -377)
+
+[node name="Trees539" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1025, -377)
+
+[node name="Trees294" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1090, -378)
+
+[node name="Trees295" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1090, -378)
+
+[node name="Trees296" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1082, -419)
+
+[node name="Trees297" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1116, -408)
+
+[node name="Trees298" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1164, -414)
+
+[node name="Trees299" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1147, -384)
+
+[node name="Trees300" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1164, -414)
+
+[node name="Trees301" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1147, -384)
+
+[node name="Trees302" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1147, -384)
+
+[node name="Trees303" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1216, -404)
+
+[node name="Trees304" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1069, -373)
+
+[node name="Trees305" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1361, -382)
+
+[node name="Trees540" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1361, -382)
+
+[node name="Trees306" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1164, -414)
+
+[node name="Trees307" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1147, -384)
+
+[node name="Trees308" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1251, -378)
+
+[node name="Trees309" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1251, -378)
+
+[node name="Trees310" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1243, -419)
+
+[node name="Trees311" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1277, -408)
+
+[node name="Trees312" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1325, -414)
+
+[node name="Trees313" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1308, -384)
+
+[node name="Trees314" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1325, -414)
+
+[node name="Trees315" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1308, -384)
+
+[node name="Trees316" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1308, -384)
+
+[node name="Trees317" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1377, -404)
+
+[node name="Trees318" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1243, -419)
+
+[node name="Trees319" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1277, -408)
+
+[node name="Trees320" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1325, -414)
+
+[node name="Trees321" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1308, -384)
+
+[node name="Trees322" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1428, -375)
+
+[node name="Trees323" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1428, -375)
+
+[node name="Trees324" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1420, -416)
+
+[node name="Trees325" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1454, -405)
+
+[node name="Trees326" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1502, -411)
+
+[node name="Trees327" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1485, -381)
+
+[node name="Trees328" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1502, -411)
+
+[node name="Trees329" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1485, -381)
+
+[node name="Trees330" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1485, -381)
+
+[node name="Trees331" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1554, -401)
+
+[node name="Trees332" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1420, -416)
+
+[node name="Trees333" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1193, -383)
+
+[node name="Trees541" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(871, -379)
+
+[node name="Trees542" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(696, -379)
+
+[node name="Trees334" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1502, -411)
+
+[node name="Trees335" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1485, -381)
+
+[node name="Trees336" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1480, -305)
+
+[node name="Trees337" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1480, -305)
+
+[node name="Trees338" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1472, -346)
+
+[node name="Trees339" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1506, -335)
+
+[node name="Trees340" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1554, -341)
+
+[node name="Trees341" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1537, -311)
+
+[node name="Trees342" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1554, -341)
+
+[node name="Trees343" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1537, -311)
+
+[node name="Trees344" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1537, -311)
+
+[node name="Trees345" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1606, -331)
+
+[node name="Trees346" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1401, -376)
+
+[node name="Trees347" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1506, -335)
+
+[node name="Trees348" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1554, -341)
+
+[node name="Trees349" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(1537, -311)
+
+[node name="Trees350" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1490, -194)
+
+[node name="Trees351" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1490, -194)
+
+[node name="Trees352" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1482, -235)
+
+[node name="Trees353" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1516, -224)
+
+[node name="Trees354" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1564, -230)
+
+[node name="Trees355" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1547, -200)
+
+[node name="Trees356" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1564, -230)
+
+[node name="Trees357" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1547, -200)
+
+[node name="Trees358" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1547, -200)
+
+[node name="Trees359" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1616, -220)
+
+[node name="Trees360" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1482, -235)
+
+[node name="Trees361" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1516, -224)
+
+[node name="Trees362" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1564, -230)
+
+[node name="Trees363" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1547, -200)
+
+[node name="Trees364" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1496, -79)
+
+[node name="Trees365" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1496, -79)
+
+[node name="Trees366" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1488, -120)
+
+[node name="Trees367" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1522, -109)
+
+[node name="Trees368" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1570, -115)
+
+[node name="Trees369" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1553, -85)
+
+[node name="Trees370" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1570, -115)
+
+[node name="Trees371" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1553, -85)
+
+[node name="Trees372" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1553, -85)
+
+[node name="Trees373" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1622, -105)
+
+[node name="Trees374" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1488, -120)
+
+[node name="Trees375" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1522, -109)
+
+[node name="Trees376" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1570, -115)
+
+[node name="Trees377" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1553, -85)
+
+[node name="Trees378" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1504, 23)
+
+[node name="Trees379" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1504, 23)
+
+[node name="Trees380" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1496, -18)
+
+[node name="Trees381" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1530, -7)
+
+[node name="Trees382" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1578, -13)
+
+[node name="Trees383" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1561, 17)
+
+[node name="Trees384" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1578, -13)
+
+[node name="Trees385" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1561, 17)
+
+[node name="Trees386" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1561, 17)
+
+[node name="Trees387" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1630, -3)
+
+[node name="Trees388" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1496, -18)
+
+[node name="Trees389" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1530, -7)
+
+[node name="Trees390" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1578, -13)
+
+[node name="Trees391" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1561, 17)
+
+[node name="Trees392" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1506, 130)
+
+[node name="Trees393" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1506, 130)
+
+[node name="Trees394" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1498, 89)
+
+[node name="Trees395" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1532, 100)
+
+[node name="Trees396" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1580, 94)
+
+[node name="Trees397" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1563, 124)
+
+[node name="Trees398" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1580, 94)
+
+[node name="Trees399" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1563, 124)
+
+[node name="Trees400" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1563, 124)
+
+[node name="Trees401" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1632, 104)
+
+[node name="Trees402" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1498, 89)
+
+[node name="Trees403" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1532, 100)
+
+[node name="Trees404" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1580, 94)
+
+[node name="Trees405" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1563, 124)
+
+[node name="Trees406" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1507, 244)
+
+[node name="Trees407" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1507, 244)
+
+[node name="Trees408" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1499, 203)
+
+[node name="Trees409" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1533, 214)
+
+[node name="Trees410" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1581, 208)
+
+[node name="Trees411" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1564, 238)
+
+[node name="Trees412" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1581, 208)
+
+[node name="Trees413" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1564, 238)
+
+[node name="Trees414" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1564, 238)
+
+[node name="Trees415" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1633, 218)
+
+[node name="Trees416" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1499, 203)
+
+[node name="Trees417" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1533, 214)
+
+[node name="Trees418" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1581, 208)
+
+[node name="Trees419" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1564, 238)
+
+[node name="Trees420" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1508, 336)
+
+[node name="Trees421" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1508, 336)
+
+[node name="Trees422" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1500, 295)
+
+[node name="Trees423" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1534, 306)
+
+[node name="Trees424" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1582, 300)
+
+[node name="Trees425" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1565, 330)
+
+[node name="Trees426" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1582, 300)
+
+[node name="Trees427" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1565, 330)
+
+[node name="Trees428" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1565, 330)
+
+[node name="Trees429" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1634, 310)
+
+[node name="Trees430" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1500, 295)
+
+[node name="Trees431" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1534, 306)
+
+[node name="Trees432" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1582, 300)
+
+[node name="Trees433" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1565, 330)
+
+[node name="Trees434" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1511, 436)
+
+[node name="Trees435" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1511, 436)
+
+[node name="Trees436" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1503, 395)
+
+[node name="Trees437" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1537, 406)
+
+[node name="Trees438" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1585, 400)
+
+[node name="Trees439" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1568, 430)
+
+[node name="Trees440" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1585, 400)
+
+[node name="Trees441" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1568, 430)
+
+[node name="Trees442" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1568, 430)
+
+[node name="Trees443" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1637, 410)
+
+[node name="Trees444" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1503, 395)
+
+[node name="Trees445" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1537, 406)
+
+[node name="Trees446" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1585, 400)
+
+[node name="Trees447" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1568, 430)
+
+[node name="Trees448" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1514, 527)
+
+[node name="Trees449" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1514, 527)
+
+[node name="Trees450" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1506, 486)
+
+[node name="Trees451" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1540, 497)
+
+[node name="Trees452" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1588, 491)
+
+[node name="Trees453" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1571, 521)
+
+[node name="Trees454" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1588, 491)
+
+[node name="Trees455" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1571, 521)
+
+[node name="Trees456" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1571, 521)
+
+[node name="Trees457" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1640, 501)
+
+[node name="Trees458" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1506, 486)
+
+[node name="Trees459" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1540, 497)
+
+[node name="Trees460" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1588, 491)
+
+[node name="Trees461" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1571, 521)
+
+[node name="Trees462" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1517, 625)
+
+[node name="Trees463" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1517, 625)
+
+[node name="Trees464" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1509, 584)
+
+[node name="Trees465" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1543, 595)
+
+[node name="Trees466" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1591, 589)
+
+[node name="Trees467" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1574, 619)
+
+[node name="Trees468" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1591, 589)
+
+[node name="Trees469" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1574, 619)
+
+[node name="Trees470" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1574, 619)
+
+[node name="Trees471" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1643, 599)
+
+[node name="Trees472" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1509, 584)
+
+[node name="Trees473" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1543, 595)
+
+[node name="Trees474" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1591, 589)
+
+[node name="Trees475" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1574, 619)
+
+[node name="Trees476" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1521, 727)
+
+[node name="Trees477" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1521, 727)
+
+[node name="Trees478" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1513, 686)
+
+[node name="Trees479" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1547, 697)
+
+[node name="Trees480" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1595, 691)
+
+[node name="Trees481" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1578, 721)
+
+[node name="Trees482" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1595, 691)
+
+[node name="Trees483" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1578, 721)
+
+[node name="Trees484" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1578, 721)
+
+[node name="Trees485" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1647, 701)
+
+[node name="Trees486" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1513, 686)
+
+[node name="Trees487" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1547, 697)
+
+[node name="Trees488" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1595, 691)
+
+[node name="Trees489" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1578, 721)
+
+[node name="Trees490" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1525, 835)
+
+[node name="Trees491" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1525, 835)
+
+[node name="Trees492" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1517, 794)
+
+[node name="Trees493" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1551, 805)
+
+[node name="Trees494" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1599, 799)
+
+[node name="Trees495" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1582, 829)
+
+[node name="Trees496" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1599, 799)
+
+[node name="Trees497" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1582, 829)
+
+[node name="Trees498" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1582, 829)
+
+[node name="Trees499" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1651, 809)
+
+[node name="Trees500" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1517, 794)
+
+[node name="Trees501" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1551, 805)
+
+[node name="Trees502" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1599, 799)
+
+[node name="Trees503" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1582, 829)
+
+[node name="Trees504" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1531, 927)
+
+[node name="Trees505" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1531, 927)
+
+[node name="Trees506" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1523, 886)
+
+[node name="Trees507" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1557, 897)
+
+[node name="Trees508" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1605, 891)
+
+[node name="Trees509" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1588, 921)
+
+[node name="Trees510" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1605, 891)
+
+[node name="Trees511" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1588, 921)
+
+[node name="Trees512" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1588, 921)
+
+[node name="Trees513" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1657, 901)
+
+[node name="Trees514" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1523, 886)
+
+[node name="Trees515" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1557, 897)
+
+[node name="Trees516" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1605, 891)
+
+[node name="Trees517" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1588, 921)
+
+[node name="Trees518" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1543, 1016)
+
+[node name="Trees519" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1543, 1016)
+
+[node name="Trees520" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1535, 975)
+
+[node name="Trees521" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1569, 986)
+
+[node name="Trees522" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1617, 980)
+
+[node name="Trees523" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1600, 1010)
+
+[node name="Trees524" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1617, 980)
+
+[node name="Trees525" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1600, 1010)
+
+[node name="Trees526" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1600, 1010)
+
+[node name="Trees527" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1669, 990)
+
+[node name="Trees528" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1535, 975)
+
+[node name="Trees529" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1569, 986)
+
+[node name="Trees530" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1617, 980)
+
+[node name="Trees531" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1600, 1010)
+
+[node name="Trees7" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-429, -386)
+
+[node name="Trees5" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-479, -374)
+
+[node name="Trees6" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-518, -339)
+
+[node name="Trees3" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-454, -348)
+
+[node name="Trees4" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-473, -317)
+
+[node name="Trees2" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-396, -316)
+
+[node name="Trees8" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-386, -261)
+
+[node name="Trees9" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-429, -275)
+
+[node name="Trees10" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+position = Vector2(-479, -263)
+
+[node name="Trees11" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-518, -228)
+
+[node name="Trees12" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-454, -237)
+
+[node name="Trees13" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-473, -206)
+
+[node name="Trees14" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-396, -205)
+
+[node name="Trees15" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-386, -139)
+
+[node name="Trees16" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-429, -153)
+
+[node name="Trees17" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-479, -141)
+
+[node name="Trees18" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-518, -106)
+
+[node name="Trees19" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-454, -115)
+
+[node name="Trees20" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-473, -84)
+
+[node name="Trees21" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-396, -83)
+
+[node name="Trees22" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-392, -27)
+
+[node name="Trees23" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-435, -41)
+
+[node name="Trees24" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-485, -29)
+
+[node name="Trees25" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-524, 6)
+
+[node name="Trees26" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-460, -3)
+
+[node name="Trees27" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-479, 28)
+
+[node name="Trees28" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-402, 29)
+
+[node name="Trees29" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-394, 93)
+
+[node name="Trees30" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-437, 79)
+
+[node name="Trees31" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-487, 91)
+
+[node name="Trees32" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-526, 126)
+
+[node name="Trees33" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-462, 117)
+
+[node name="Trees34" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-481, 148)
+
+[node name="Trees35" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-404, 149)
+
+[node name="Trees36" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-394, 227)
+
+[node name="Trees37" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-437, 213)
+
+[node name="Trees38" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-487, 225)
+
+[node name="Trees39" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-526, 260)
+
+[node name="Trees40" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-462, 251)
+
+[node name="Trees41" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-481, 282)
+
+[node name="Trees42" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-404, 283)
+
+[node name="Trees43" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-396, 351)
+
+[node name="Trees44" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-439, 337)
+
+[node name="Trees45" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-489, 349)
+
+[node name="Trees46" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-528, 384)
+
+[node name="Trees47" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-464, 375)
+
+[node name="Trees48" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-483, 406)
+
+[node name="Trees49" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-406, 407)
+
+[node name="Trees50" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-397, 479)
+
+[node name="Trees51" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-440, 465)
+
+[node name="Trees52" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-490, 477)
+
+[node name="Trees53" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-529, 512)
+
+[node name="Trees54" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-465, 503)
+
+[node name="Trees55" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-484, 534)
+
+[node name="Trees56" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-407, 535)
+
+[node name="Trees57" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-399, 596)
+
+[node name="Trees58" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-442, 582)
+
+[node name="Trees59" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-492, 594)
+
+[node name="Trees60" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-531, 629)
+
+[node name="Trees61" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-467, 620)
+
+[node name="Trees62" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-486, 651)
+
+[node name="Trees63" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-409, 652)
+
+[node name="Trees64" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-400, 703)
+
+[node name="Trees65" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-443, 689)
+
+[node name="Trees66" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-493, 701)
+
+[node name="Trees67" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-532, 736)
+
+[node name="Trees68" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-468, 727)
+
+[node name="Trees69" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-487, 758)
+
+[node name="Trees70" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-410, 759)
+
+[node name="Trees71" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-401, 830)
+
+[node name="Trees72" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-444, 816)
+
+[node name="Trees73" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-494, 828)
+
+[node name="Trees74" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-533, 863)
+
+[node name="Trees75" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-469, 854)
+
+[node name="Trees76" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-488, 885)
+
+[node name="Trees77" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-411, 886)
+
+[node name="Trees78" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-394, 964)
+
+[node name="Trees79" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-437, 950)
+
+[node name="Trees80" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-487, 962)
+
+[node name="Trees81" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-526, 997)
+
+[node name="Trees82" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-462, 988)
+
+[node name="Trees83" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-481, 1019)
+
+[node name="Trees84" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-404, 1020)
+
+[node name="Trees85" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-214, 974)
+
+[node name="Trees86" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-257, 960)
+
+[node name="Trees87" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-307, 972)
+
+[node name="Trees88" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-346, 1007)
+
+[node name="Trees89" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-282, 998)
+
+[node name="Trees90" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-301, 1029)
+
+[node name="Trees91" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-224, 1030)
+
+[node name="Trees92" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-42, 978)
+
+[node name="Trees93" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-85, 964)
+
+[node name="Trees94" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-135, 976)
+
+[node name="Trees95" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-174, 1011)
+
+[node name="Trees96" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-110, 1002)
+
+[node name="Trees97" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-129, 1033)
+
+[node name="Trees98" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(-52, 1034)
+
+[node name="Trees99" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(134, 977)
+
+[node name="Trees100" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(91, 963)
+
+[node name="Trees101" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(41, 975)
+
+[node name="Trees102" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(2, 1010)
+
+[node name="Trees103" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(66, 1001)
+
+[node name="Trees104" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(47, 1032)
+
+[node name="Trees105" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(124, 1033)
+
+[node name="Trees106" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(323, 976)
+
+[node name="Trees107" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(280, 962)
+
+[node name="Trees108" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(230, 974)
+
+[node name="Trees109" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(191, 1009)
+
+[node name="Trees110" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(255, 1000)
+
+[node name="Trees111" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(236, 1031)
+
+[node name="Trees112" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(313, 1032)
+
+[node name="Trees113" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(509, 980)
+
+[node name="Trees114" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(466, 966)
+
+[node name="Trees115" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(416, 978)
+
+[node name="Trees116" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(377, 1013)
+
+[node name="Trees117" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(441, 1004)
+
+[node name="Trees118" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(422, 1035)
+
+[node name="Trees119" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(499, 1036)
+
+[node name="Trees120" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(677, 993)
+
+[node name="Trees121" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(634, 979)
+
+[node name="Trees122" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(584, 991)
+
+[node name="Trees123" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(545, 1026)
+
+[node name="Trees124" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(609, 1017)
+
+[node name="Trees125" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(590, 1048)
+
+[node name="Trees126" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(667, 1049)
+
+[node name="Trees127" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(872, 999)
+
+[node name="Trees128" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(829, 985)
+
+[node name="Trees129" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(779, 997)
+
+[node name="Trees130" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(740, 1032)
+
+[node name="Trees131" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(804, 1023)
+
+[node name="Trees132" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(785, 1054)
+
+[node name="Trees133" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(862, 1055)
+
+[node name="Trees134" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1052, 995)
+
+[node name="Trees135" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1009, 981)
+
+[node name="Trees136" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(959, 993)
+
+[node name="Trees137" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(920, 1028)
+
+[node name="Trees138" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(984, 1019)
+
+[node name="Trees139" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(965, 1050)
+
+[node name="Trees140" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1042, 1051)
+
+[node name="Trees141" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1239, 999)
+
+[node name="Trees142" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1196, 985)
+
+[node name="Trees143" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1146, 997)
+
+[node name="Trees144" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1107, 1032)
+
+[node name="Trees145" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1171, 1023)
+
+[node name="Trees146" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1152, 1054)
+
+[node name="Trees147" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1229, 1055)
+
+[node name="Trees148" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1425, 994)
+
+[node name="Trees149" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1382, 980)
+
+[node name="Trees150" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1332, 992)
+
+[node name="Trees151" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1293, 1027)
+
+[node name="Trees152" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1357, 1018)
+
+[node name="Trees153" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1338, 1049)
+
+[node name="Trees154" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1415, 1050)
+
+[node name="Trees155" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1581, 999)
+
+[node name="Trees156" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1538, 985)
+
+[node name="Trees157" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1488, 997)
+
+[node name="Trees158" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1449, 1032)
+
+[node name="Trees159" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1513, 1023)
+
+[node name="Trees160" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1494, 1054)
+
+[node name="Trees161" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1571, 1055)
+
+[node name="Trees162" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1581, 999)
+
+[node name="Trees163" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1538, 985)
+
+[node name="Trees164" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1488, 997)
+
+[node name="Trees165" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1449, 1032)
+
+[node name="Trees166" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1513, 1023)
+
+[node name="Trees167" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1494, 1054)
+
+[node name="Trees168" parent="TileMap/Trees" instance=ExtResource("2_yj730")]
+z_index = 5
+position = Vector2(1571, 1055)
+
+[node name="Player" parent="." instance=ExtResource("2_cyffv")]
+position = Vector2(566, 366)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(11, -27)
+rotation = 3.14159
+scale = Vector2(0.239999, 0.239999)
+limit_left = -400
+limit_top = -400
+limit_right = 1505
+limit_bottom = 1000
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.4
+drag_top_margin = 0.3
+drag_right_margin = 0.4
+drag_bottom_margin = 0.3
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="MobSpawner" parent="." instance=ExtResource("3_fqtk0")]
+position = Vector2(-250, -1004)
+
+[node name="MobSpawner2" parent="." instance=ExtResource("4_ltn1h")]
+
+[node name="Game_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_nyg15")
+volume_db = -6.433
+script = ExtResource("8_3eymg")
+
+[node name="DifficultSystem" type="Node" parent="." node_paths=PackedStringArray("mob_spawner")]
+script = ExtResource("9_jvlc3")
+mob_spawner = NodePath("../MobSpawner")
+
+[node name="GameUI" parent="." instance=ExtResource("6_lma0a")]

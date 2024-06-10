@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://baoy1xnsfeyvd"]
+
+[ext_resource type="PackedScene" uid="uid://dre8tkhxiexem" path="res://Player/player.tscn" id="2_uylnn"]
+[ext_resource type="PackedScene" uid="uid://cqxmcsqi3cemv" path="res://enemies/sheep.tscn" id="2_v8yay"]
+[ext_resource type="AudioStream" uid="uid://w0rc1hg8t1i8" path="res://sound/game_sound.wav" id="3_7m8nd"]
+[ext_resource type="Script" path="res://sound/script/Game_sound.gd" id="4_mthm3"]
+[ext_resource type="PackedScene" uid="uid://bp6wgu0c6agsb" path="res://enemies/pawn.tscn" id="5_non8m"]
+[ext_resource type="PackedScene" uid="uid://cr0j0ol2152vw" path="res://enemies/barel.tscn" id="5_ul5q6"]
+[ext_resource type="PackedScene" uid="uid://c3ai0ddph0p4c" path="res://enemies/globin.tscn" id="6_yvak5"]
+
+[node name="TestBattle" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("2_uylnn")]
+position = Vector2(270, 522)
+
+[node name="Barel" parent="." instance=ExtResource("5_ul5q6")]
+position = Vector2(106, 329)
+
+[node name="Game_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_7m8nd")
+volume_db = -6.433
+script = ExtResource("4_mthm3")
+
+[node name="Pawn" parent="." instance=ExtResource("5_non8m")]
+position = Vector2(103, 562)
+
+[node name="Globin" parent="." instance=ExtResource("6_yvak5")]
+position = Vector2(373, 364)
+
+[node name="sheep" parent="." instance=ExtResource("2_v8yay")]
+position = Vector2(435, 516)

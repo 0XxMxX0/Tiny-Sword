@@ -1,0 +1,223 @@
+[gd_scene load_steps=27 format=3 uid="uid://c3ai0ddph0p4c"]
+
+[ext_resource type="Script" path="res://enemies/behaviors/follow_player.gd" id="1_de4ae"]
+[ext_resource type="Script" path="res://enemies/behaviors/enemy.gd" id="1_t1ji3"]
+[ext_resource type="PackedScene" uid="uid://dc6yfoij3nmce" path="res://misc/small_shull.tscn" id="2_hivix"]
+[ext_resource type="Texture2D" uid="uid://comq0b1pgda1" path="res://addons/Tiny Swords/Factions/Goblins/Troops/Torch/Blue/Torch_Blue.png" id="4_wxfum"]
+[ext_resource type="AudioStream" uid="uid://b5jmr75vvywgj" path="res://sound/attack_globin.ogg" id="5_odkov"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ol5em"]
+atlas = ExtResource("4_wxfum")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6a04"]
+atlas = ExtResource("4_wxfum")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31p7c"]
+atlas = ExtResource("4_wxfum")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsagc"]
+atlas = ExtResource("4_wxfum")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fo70r"]
+atlas = ExtResource("4_wxfum")
+region = Rect2(960, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1afy"]
+atlas = ExtResource("4_wxfum")
+region = Rect2(0, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jflk"]
+atlas = ExtResource("4_wxfum")
+region = Rect2(192, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bf0sh"]
+atlas = ExtResource("4_wxfum")
+region = Rect2(384, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytave"]
+atlas = ExtResource("4_wxfum")
+region = Rect2(576, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6r8wn"]
+atlas = ExtResource("4_wxfum")
+region = Rect2(768, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3of1r"]
+atlas = ExtResource("4_wxfum")
+region = Rect2(960, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0qx5"]
+atlas = ExtResource("4_wxfum")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uaocf"]
+atlas = ExtResource("4_wxfum")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ttcl3"]
+atlas = ExtResource("4_wxfum")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2sh2"]
+atlas = ExtResource("4_wxfum")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmn2o"]
+atlas = ExtResource("4_wxfum")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28hsu"]
+atlas = ExtResource("4_wxfum")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gelim"]
+atlas = ExtResource("4_wxfum")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hmkff"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ol5em")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ol5em")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6a04")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31p7c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsagc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fo70r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1afy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jflk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bf0sh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ytave")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_6r8wn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3of1r")
+}],
+"loop": true,
+"name": &"enemy_attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0qx5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uaocf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ttcl3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2sh2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmn2o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28hsu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gelim")
+}],
+"loop": true,
+"name": &"stop",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_124d2"]
+size = Vector2(50, 62.2222)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fnu48"]
+size = Vector2(56.1111, 55)
+
+[node name="Globin" type="CharacterBody2D" groups=["enemies"]]
+modulate = Color(1, 0.980392, 1, 1)
+z_index = 1
+scale = Vector2(1.8, 1.8)
+motion_mode = 1
+script = ExtResource("1_t1ji3")
+health = 20
+type = "Globin"
+nivel = 4
+death_prefab = Array[PackedScene]([ExtResource("2_hivix")])
+hit_damage = 5
+frequency_hitbox = 1.0
+collision_shape_right = 36.389
+collision_shape_left = -40.278
+metadata/_edit_vertical_guides_ = [-123.0]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 2
+position = Vector2(-2, -27)
+sprite_frames = SubResource("SpriteFrames_hmkff")
+autoplay = "default"
+offset = Vector2(0, -5)
+
+[node name="BodyEnemy" type="CollisionShape2D" parent="."]
+position = Vector2(-1.11111, -28.3333)
+shape = SubResource("RectangleShape2D_124d2")
+debug_color = Color(0, 0.6, 0.701961, 0.14902)
+
+[node name="FollowPlayer" type="Node" parent="."]
+script = ExtResource("1_de4ae")
+speed = 0.4
+
+[node name="DamageDigitMarker" type="Marker2D" parent="."]
+z_index = 1
+position = Vector2(0, -64.4445)
+
+[node name="AtackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AtackArea"]
+unique_name_in_owner = true
+position = Vector2(36.389, -28.056)
+shape = SubResource("RectangleShape2D_fnu48")
+debug_color = Color(0.878431, 0.305882, 0.4, 0.419608)
+
+[node name="ColorRect" type="ColorRect" parent="AtackArea/CollisionShape2D"]
+visible = false
+offset_left = -105.0
+offset_top = -27.0
+offset_right = 28.0
+offset_bottom = 28.0
+color = Color(1, 0.129412, 0.109804, 0.27451)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -26.1111
+offset_top = -59.3333
+offset_right = 23.8889
+offset_bottom = 2.66667
+color = Color(0.0588235, 0.501961, 0.74902, 0.215686)
+
+[node name="Attack_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_odkov")

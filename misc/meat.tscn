@@ -1,0 +1,133 @@
+[gd_scene load_steps=19 format=3 uid="uid://cqw0k2hin3mk5"]
+
+[ext_resource type="Texture2D" uid="uid://bu4idd25snkid" path="res://addons/Tiny Swords/Resources/Resources/M_Spawn.png" id="1_w528u"]
+[ext_resource type="Script" path="res://Player/behavios/life_regenerator.gd" id="2_0vlmt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7n0mq"]
+atlas = ExtResource("1_w528u")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u68g1"]
+atlas = ExtResource("1_w528u")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_accqw"]
+atlas = ExtResource("1_w528u")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kiugh"]
+atlas = ExtResource("1_w528u")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udeo8"]
+atlas = ExtResource("1_w528u")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8iowl"]
+atlas = ExtResource("1_w528u")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wceqd"]
+atlas = ExtResource("1_w528u")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a15oo"]
+atlas = ExtResource("1_w528u")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pubpo"]
+atlas = ExtResource("1_w528u")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_he0o4"]
+atlas = ExtResource("1_w528u")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1aul4"]
+atlas = ExtResource("1_w528u")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ialox"]
+atlas = ExtResource("1_w528u")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aecxm"]
+atlas = ExtResource("1_w528u")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udctc"]
+atlas = ExtResource("1_w528u")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1qhea"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7n0mq")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_u68g1")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_accqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kiugh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udeo8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8iowl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wceqd")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a15oo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pubpo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_he0o4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1aul4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ialox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aecxm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udctc")
+}],
+"loop": false,
+"name": &"die",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uyd3a"]
+radius = 26.0
+
+[node name="Meat" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_1qhea")
+animation = &"die"
+autoplay = "default"
+frame = 6
+frame_progress = 1.0
+offset = Vector2(0, -23)
+script = ExtResource("2_0vlmt")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(3, -8)
+shape = SubResource("CircleShape2D_uyd3a")

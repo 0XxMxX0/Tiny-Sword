@@ -1,0 +1,123 @@
+[gd_scene load_steps=10 format=3 uid="uid://cooy1k8jwbck6"]
+
+[ext_resource type="Texture2D" uid="uid://42e1ig3w1ivm" path="res://addons/Tiny Swords/UI/Ribbons/Ribbon_Blue_3Slides.png" id="1_jengx"]
+[ext_resource type="Script" path="res://ui/configs/game_ui.gd" id="1_wy68d"]
+[ext_resource type="Texture2D" uid="uid://q1r7xvxp4mkv" path="res://addons/Tiny Swords/UI/Buttons/Button_Red_Pressed.png" id="2_tl3uo"]
+[ext_resource type="Texture2D" uid="uid://duuc0t21evj5h" path="res://addons/Tiny Swords/Resources/Resources/G_Idle.png" id="3_srkv8"]
+[ext_resource type="Texture2D" uid="uid://fragom5irx1c" path="res://addons/Tiny Swords/Deco/14.png" id="4_si6hh"]
+[ext_resource type="Script" path="res://ui/configs/Life.gd" id="5_0beld"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8nhxh"]
+texture = ExtResource("1_jengx")
+texture_margin_left = 48.0
+texture_margin_top = 16.0
+texture_margin_right = 48.0
+texture_margin_bottom = 32.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_daobo"]
+texture = ExtResource("3_srkv8")
+region_rect = Rect2(48, 48, 48, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e4ek4"]
+texture = ExtResource("4_si6hh")
+
+[node name="GameUI" type="CanvasLayer"]
+script = ExtResource("1_wy68d")
+
+[node name="Time" type="Panel" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -90.0
+offset_top = 10.0
+offset_right = 90.0
+offset_bottom = 75.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_8nhxh")
+
+[node name="TimerLabel" type="Label" parent="Time"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.018
+offset_left = -55.0
+offset_top = 5.0
+offset_right = 56.0
+offset_bottom = 42.83
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00161, 1)
+theme_override_font_sizes/font_size = 28
+text = "8:50
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gold" type="Panel" parent="."]
+offset_left = 16.0
+offset_top = 52.0
+offset_right = 48.0
+offset_bottom = 84.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_daobo")
+
+[node name="GoldLabel" type="Label" parent="Gold"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = -14.0
+offset_right = 90.0
+offset_bottom = 17.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 22
+text = "60,00 
+"
+
+[node name="Dead" type="Panel" parent="."]
+offset_left = 125.0
+offset_top = 40.0
+offset_right = 185.0
+offset_bottom = 100.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_e4ek4")
+
+[node name="DeadsLabel" type="Label" parent="Dead"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 25.0
+offset_top = -16.0
+offset_right = 65.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 22
+text = "100"
+
+[node name="Life" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_0beld")
+
+[node name="Hearts" type="TextureRect" parent="Life"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 328.0
+offset_bottom = 76.0
+scale = Vector2(0.626742, 0.626742)
+texture = ExtResource("2_tl3uo")
+expand_mode = 1
+stretch_mode = 1

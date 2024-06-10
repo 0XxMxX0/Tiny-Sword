@@ -1,0 +1,123 @@
+[gd_scene load_steps=18 format=3 uid="uid://c3ai0ddph0p4c"]
+
+[ext_resource type="Texture2D" uid="uid://bi3mtd13b4l5o" path="res://addons/Tiny Swords/Factions/Knights/Troops/Pawn/Red/Pawn_Red.png" id="1_742wr"]
+[ext_resource type="Script" path="res://enemies/behaviors/follow)player.gd" id="1_de4ae"]
+[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_t1ji3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohlrt"]
+atlas = ExtResource("1_742wr")
+region = Rect2(0, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccqh0"]
+atlas = ExtResource("1_742wr")
+region = Rect2(192, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rdjmt"]
+atlas = ExtResource("1_742wr")
+region = Rect2(384, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hydga"]
+atlas = ExtResource("1_742wr")
+region = Rect2(576, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1g8j"]
+atlas = ExtResource("1_742wr")
+region = Rect2(768, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3m35s"]
+atlas = ExtResource("1_742wr")
+region = Rect2(960, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_losno"]
+atlas = ExtResource("1_742wr")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgcdv"]
+atlas = ExtResource("1_742wr")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwift"]
+atlas = ExtResource("1_742wr")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n77wc"]
+atlas = ExtResource("1_742wr")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xwei"]
+atlas = ExtResource("1_742wr")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpp5i"]
+atlas = ExtResource("1_742wr")
+region = Rect2(960, 192, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hmkff"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohlrt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ccqh0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rdjmt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hydga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1g8j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3m35s")
+}],
+"loop": true,
+"name": &"enemy_attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_losno")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgcdv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwift")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n77wc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xwei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpp5i")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eyknp"]
+radius = 26.0
+height = 52.0
+
+[node name="Pawn" type="CharacterBody2D" groups=["enemies"]]
+motion_mode = 1
+script = ExtResource("1_t1ji3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, -27)
+sprite_frames = SubResource("SpriteFrames_hmkff")
+animation = &"run"
+autoplay = "run"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -29)
+shape = SubResource("CapsuleShape2D_eyknp")
+
+[node name="FollowPlayer" type="Node" parent="."]
+script = ExtResource("1_de4ae")

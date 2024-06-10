@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://baoy1xnsfeyvd"]
+
+[ext_resource type="PackedScene" uid="uid://c3ai0ddph0p4c" path="res://enemies/pawn.tscn" id="1_3idfg"]
+[ext_resource type="PackedScene" uid="uid://dre8tkhxiexem" path="res://Player/player.tscn" id="2_uylnn"]
+
+[node name="TestBattle" type="Node2D"]
+
+[node name="Pawn" parent="." instance=ExtResource("1_3idfg")]
+position = Vector2(78, 741)
+
+[node name="Pawn2" parent="." instance=ExtResource("1_3idfg")]
+position = Vector2(-53, 536)
+
+[node name="Pawn3" parent="." instance=ExtResource("1_3idfg")]
+position = Vector2(-105, 342)
+
+[node name="Player" parent="." instance=ExtResource("2_uylnn")]
+position = Vector2(542, 306)

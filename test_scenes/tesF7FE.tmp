@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://baoy1xnsfeyvd"]
+
+[ext_resource type="PackedScene" uid="uid://c3ai0ddph0p4c" path="res://enemies/globin.tscn" id="2_o1ki5"]
+[ext_resource type="PackedScene" uid="uid://dre8tkhxiexem" path="res://Player/player.tscn" id="2_uylnn"]
+
+[node name="TestBattle" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("2_uylnn")]
+position = Vector2(578, 328)
+
+[node name="Globin" parent="." instance=ExtResource("2_o1ki5")]
+position = Vector2(258, 338)

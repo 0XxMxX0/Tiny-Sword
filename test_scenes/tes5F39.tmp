@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://baoy1xnsfeyvd"]
+
+[ext_resource type="PackedScene" uid="uid://dre8tkhxiexem" path="res://Player/player.tscn" id="2_uylnn"]
+[ext_resource type="PackedScene" uid="uid://cr0j0ol2152vw" path="res://enemies/barel.tscn" id="3_2qlps"]
+[ext_resource type="PackedScene" uid="uid://c3ai0ddph0p4c" path="res://enemies/globin.tscn" id="3_le8iq"]
+
+[node name="TestBattle" type="Node2D"]
+
+[node name="sheep" parent="." instance=ExtResource("3_le8iq")]
+position = Vector2(229, 286)
+
+[node name="Player" parent="." instance=ExtResource("2_uylnn")]
+position = Vector2(270, 522)
+
+[node name="Barel" parent="." instance=ExtResource("3_2qlps")]
+position = Vector2(386, 370)
